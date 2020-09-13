@@ -2,9 +2,8 @@
 harmony-ratio,0,100,1,float,0
 phase-lock-switch,0,1,0,int,
 phase-lock-value,0,1,0,float,
-main-env-amp-factor,0,100,1,float,
-main-env-durations,0,1000,0,list<float:8>,
-main-env-amps,0,100,0,list<float:7>,
+env-amp-factor,0,100,1,float,
+env-durations,0,1000,0,list<float:8>,
+env-amps,0,100,0,list<float:7>,
 audio-out-gain,0,1,0,float,
-to-fx-gains,0,1,0,list<float:4>,
 to-op-gains,0,100,0,list<float:10>,
