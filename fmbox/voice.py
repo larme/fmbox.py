@@ -40,8 +40,8 @@ class Voice(DSPObj):
         env_plus_1 = Pipe([env, plus_1])
         self.freq_gen = partial(Mul(), [env_plus_1, self.pa.main_freq])
 
-        # op_idx starts with 1, ends with op_num
-        self.ops = [Operator(idx + 1, self.op_num, self.preset)for idx in range(op_num)]
+        # op_idx starts with 0, ends with op_num - 1
+        self.ops = [Operator(idx, self.op_num, self.preset)for idx in range(op_num)]
 
         super().__init__()
 
@@ -56,20 +56,18 @@ class Voice(DSPObj):
         self.freq_gen.tick()
         freq = self.freq_gen.out_buffer[0]
 
-        buf = np.zeros(1 + op_num, dtype=DSPFloat)
+        audio_out = DSPZero
+        buf = np.zeros(op_num, dtype=DSPFloat)
 
         for op in self.ops:
             op.in_buffer[0] = freq
             op.in_buffer[2] = trig
             op.tick()
 
-            for i in range(op_num + 1):
-                buf[i] += op.out_buffer[i]
+            audio_out += op.out_buffer[0]
+            buf += op.out_buffer[1:op_num+1]
 
-        #print(buf)
-        audio_out = buf[0]
-        for i in range(op_num):
-            op_idx = i + 1
-            self.ops[i].in_buffer[1] = buf[op_idx]
+        for op_idx in range(op_num):
+            self.ops[op_idx].in_buffer[1] = buf[op_idx]
 
         return audio_out * self.pa.master_gain.get_value()

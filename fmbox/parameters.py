@@ -168,7 +168,7 @@ def csv2pa(filename, base_offset, preset=fmbox.presets.current):
 
 
 def make_op_pa(op_idx, preset=fmbox.presets.current):
-    base_offset = SECTION_SIZE * op_idx
+    base_offset = SECTION_SIZE * (op_idx + 1)
     return csv2pa('op_params.csv', base_offset, preset)
 
 
