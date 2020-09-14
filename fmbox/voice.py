@@ -70,4 +70,4 @@ class Voice(DSPObj):
         for op_idx in range(op_num):
             self.ops[op_idx].in_buffer[1] = buf[op_idx]
 
-        return audio_out * self.pa.master_gain.get_value()
+        return [audio_out * self.pa.master_gain.get_value()]
