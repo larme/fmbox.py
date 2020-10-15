@@ -1,9 +1,9 @@
 ﻿name,min,max,default,type,offset
-harmony-ratio,0,100,1,float,0
-phase-lock-switch,0,1,0,int,
-phase-lock-value,0,1,0,float,
-env-amp-factor,0,100,1,float,
-env-durations,0,1000,0,list<float:8>,
-env-amps,0,100,0,list<float:7>,
-audio-out-gain,0,1,0,float,
-to-op-gains,0,100,0,list<float:10>,
+harmony_ratio,0,4,1,float,0
+phase_lock_switch,0,1,0,int,
+phase_lock_value,0,1,0,float,
+env_amp_factor,0,1.0,1.0,float,
+env_durations,0,1000,0,list<float:4>,
+env_amps,0,1.0,0,list<float:3>,
+audio_out_gain,0,1,0,float,
+to_op_gains,0,20,0,list<float:4>,

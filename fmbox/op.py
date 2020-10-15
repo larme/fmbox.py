@@ -4,7 +4,7 @@ from fakebox.stdlib.env import LineSegs
 from fakebox.stdlib.math import Mul
 from fakebox.stdlib.osc import make_sinosc
 
-from fmbox.consts import SECTION_SIZE, OP_NUM
+from fmbox.consts import SECTION_SIZE, OP_NUM, ENV_SEG_NUM
 from fmbox.presets import current as current_preset
 from fmbox.parameters import make_op_pa
 
@@ -31,7 +31,7 @@ def make_op_env(op_pa):
     durations = op_pa.env_durations
     amps = op_pa.env_amps
     args = [amp_factor] + durations + amps
-    env = LineSegs(8)
+    env = LineSegs(ENV_SEG_NUM)
     return partial(env, args)
 
 
@@ -82,5 +82,6 @@ class Operator(DSPObj):
         osc_out = self.core_osc.out_buffer[0]
 
         audio_out = osc_out * self.pa.audio_out_gain.get_value()
-        op_outs = [osc_out * gain.get_value() * freq for gain in self.pa.to_op_gains]
+        raw_out = osc_out * freq
+        op_outs = [raw_out * gain.get_value() for gain in self.pa.to_op_gains]
         return [audio_out] + op_outs

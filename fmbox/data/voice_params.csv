@@ -1,6 +1,6 @@
 ﻿name,min,max,default,type,offset
-main-freq,0,20000,440,float,0
-master-gain,0,1,1,float,
-fmod-env-amp-factor,0,100,1,float,
-fmod-env-durations,0,1000,0,list<float:8>,
-fmod-env-amps,0,100,0,list<float:7>,
+main_freq,0,1000,110,float,0
+master_gain,0,1,1,float,
+fmod_env_amp_factor,0,100,1,float,
+fmod_env_durations,0,1000,0,list<float:4>,
+fmod_env_amps,0,100,0,list<float:3>,
